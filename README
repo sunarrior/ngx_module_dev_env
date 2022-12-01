@@ -1,0 +1,39 @@
+This repo is written base on:
+1. https://github.com/abedra/nginx-auth-token-module
+2. https://www.airpair.com/nginx/extending-nginx-tutorial
+3. http://nginx.org/en/docs/dev/development_guide.html
+4. https://www.nginx.com/resources/wiki/extending/api/http/
+
+INSTALLATION GUIDE
+
+ALWAYS STAY AT MODULE_DEV_ENV FOLDER TO BUILD YOUR NGINX
+
+I. Install require dependency
+1. sudo apt-get install build-essential libpcre3-dev zlib1g-dev libcurl4-openssl-dev
+2. install Ruby, Rubygems, and Bundler (using RVM installer) (Ignore if you have install before)
+3. run bundle to isntall require dependencies in Gemfile
+
+II. Run "rake -T" to see if everything work fine
+
+III. Change mod for 1_install_nginx.sh and 2_compile.sh
+1. chmod +x script/1_install_nginx.sh
+2. chmod +x script/2_compile.sh
+
+IV. Remember to change your nginx version in:
+1. 1_install_nginx.sh
+2. 3_compile_module.sh
+
+V. Install nginx from source
+1. rake bootstrap
+
+VI. Run "rake" command to check if server is up
+
+VII. Start develop module in src folder
+
+NOTICE: In 3_compile_dynamic_module.sh
+1. If you build module to run on dev enviroment, remove --with-compat
+2. If you build module to run on production, add --with-compat 
+VIII. Run "rake nginx:compile_module" to compile module
+NOTICE: 
+1. After compile, module will be copied to build/nginx/modules in dev enviroment
+2. If you want to load module to nginx.conf on production, put module.so file to /usr/share/nginx/modules
